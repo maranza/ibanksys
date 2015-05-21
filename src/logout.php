@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 include("logic/objects.php");
 session_start();
 session_destroy();
