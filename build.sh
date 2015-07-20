@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-echo "Compose all the necessary files"
+echo "Composing files"
 
 echo ""
 
@@ -11,7 +11,7 @@ if [[ -d "site" ]]; then
 
 else
 	cp  -r src site
-	mv img site
+	cp -r img site
 
 
 
