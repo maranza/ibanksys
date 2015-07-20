@@ -2,13 +2,13 @@
 <?php
 
 include_once "sessions.php";
-
+include_once "crsf.php";
 function print_flash_message($mess) {
 
     echo "<b>$mess</b><br>";
 }
 
-//send mail function 
+//send mail function
 function send_mail($to, $message) {
 
     $headers = "From: no-reply@yourdomain.com \n Reply-To:no-reply@yourdomain.com";
@@ -57,7 +57,7 @@ function checkuser($id) {
 }
 
 //checks if the person is already  registered to the bank,based on the person's
-//idnumber 
+//idnumber
 function checkidnumber($id) {
     return(runquery("SELECT * from customer where idnumber=:id", array("id" => $id)));
 }
@@ -147,7 +147,7 @@ function updateStatus($unique, $data = array()) {
         "address" => trim(strip_tags($data[4])),
         "idnumber" => $unique);
 
-    if (runquery("UPDATE customer SET firstname=:firstname,lastname=:lastname,email=:email,mobilenumber=:mobile,address=:address 
+    if (runquery("UPDATE customer SET firstname=:firstname,lastname=:lastname,email=:email,mobilenumber=:mobile,address=:address
 		WHERE idnumber=:idnumber", $da))
         header("Location:?page=status");
 }

@@ -1,5 +1,6 @@
 <?php
 if (isset($_POST['pay'])) {
+    check_token();
     $amt = (float) $_POST['amount'];
     $sep = sep($_POST['beni']);
     $beni = new Profile(NULL, $sep[0]);
@@ -46,6 +47,7 @@ if (isset($_POST['pay'])) {
         <input type="text" name="amount"  value="<?php print @$_POST['amount']; ?>" required pattern="[1-9]{1}([0-9])+" title="Amount"/>
         <input type="hidden" name="date" value="<?php print date("Y-m-d"); ?>" />
         <br>
+        <?php draw_tokenbox(); ?>
         <input type="submit" name="pay" value="Transfer" class="btn"/>
         <input type="reset" value="Cancel Transfer" class="btn" />
     </fieldset>

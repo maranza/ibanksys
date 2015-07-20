@@ -1,5 +1,6 @@
 <?php
 if (isset($_POST['update'])) {
+    check_token();
     updateStatus($profile->getIdnumber(), array($_POST['fname'], $_POST['lastname'], $_POST['email'], $_POST['mobile'], $_POST['address']));
 }
 ?>
@@ -11,6 +12,7 @@ if (isset($_POST['update'])) {
         <label>Lastname</label><br>
         <input type="text" name="lastname" value="<?php echo $profile->getLastname(); ?>" required pattern="[a-zA-Z]{1,20}"/><br>
         <br>
+        <?php draw_tokenbox(); ?>
         <label>Email Address</label><br>
         <input type="email" name="email" value="<?php echo $profile->getEmail(); ?>" required/><br>
         <label>Mobile Number</label><br>

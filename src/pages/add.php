@@ -1,6 +1,7 @@
 
 <?php
 if (isset($_POST['add'])) {
+    check_token();
     //prevents customer from adding himself/herself as a beneficiary
     if ($profile->getAccnumber() != trim($_POST['acn'])) {
         addBen($profile->getAccNumber(), array($_POST['name'], $_POST['acn'], $_POST['branch'], $_POST['bank']));
@@ -34,7 +35,7 @@ if (isset($_POST['add'])) {
         </select>
         <br>
         <label>Branchcode</label><br>
-
+        <?php draw_tokenbox(); ?>
         <input type="text" name="branch" value="<?php print @$_POST['branch']; ?>" required />
         <br>
         <input type="submit" name="add" value="Add" class="btn"/>

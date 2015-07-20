@@ -1,7 +1,7 @@
 
 <?php
 if (isset($_POST['send'])) {
-
+    check_token();
     $price = $_POST['price'];
     $service = $_POST['ser'];
     if ($profile->getBalance() >= $price) {
@@ -37,6 +37,7 @@ if (isset($_POST['send'])) {
         <label>Cellnumber</label><br>
         <input type="text" name="cell" required pattern="[0-9]{10}" title="Enter a Valid CellphoneNumber"/><br>
         <input type="hidden" name="date" value="<?php print date("Y-m-d"); ?>" />
+        <?php draw_tokenbox(); ?>
         <input type="submit" name="send" value="Buy"/>
         <input type="reset" name="cancel" value="Cancel" />
     </fieldset>

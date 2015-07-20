@@ -12,8 +12,8 @@ if (isset($_SESSION['admin'])) {
     header("Location:user.php");
     exit;
 }
-$token = md5(uniqid(rand(), true));
 if (isset($_POST['send'])) {
+    check_token();
     $login = new Login($_POST['username'], $_POST['pass']);
     if ($login->checkLogin()) {
         if ($login->isAdmin()) {
@@ -52,7 +52,7 @@ if (isset($_POST['send'])) {
         </script>
 
         <style style="text/css">
-            body{margin:0px auto;	
+            body{margin:0px auto;
 
                  font-family:verdana;
                  font-size:12px;
@@ -116,6 +116,7 @@ if (isset($_GET['page'])) {
         <?php
         $bt = new BotCheck();
         if (isset($_POST['reg'])) {
+            check_token();
             $id = $_POST['idnumber'];
             $user = $_POST['username'];
             $pass = $_POST['pass'];
@@ -155,12 +156,13 @@ if (isset($_GET['page'])) {
                                 <input type="text" name="idnumber" value="<?php echo @$_POST['idnumber']; ?>" required autocomplete="off" /><br>
                                 <label>Choose a Username</label><br>
                                 <input type="text" name="username" value="<?php echo @$_POST['username']; ?>"  autocomplete="off" required/>
-
+                                <?php draw_tokenbox();?>
                                 <br>
                                 <label>Choose a password</label>
                                 <input type="password" name="pass" required autocomplete="off"/><br>
                                 <label>Confirm Password</label>
                                 <input type="password" name="c" required autocomplete="off" /><br>
+
                         <?php
                         /*
                           <label>Security Question</label><br>
@@ -185,6 +187,7 @@ if (isset($_GET['page'])) {
 
                                 <?php
                                 if (isset($_POST['rfg'])) {
+                                    check_token();
                                     $idnum = $_POST['id'];
                                     $p = new Profile($idnum);
                                     if ($p->getUsername() != "") {
@@ -201,7 +204,7 @@ if (isset($_GET['page'])) {
                             <p>
                             <form action="/?page=forgot" method="post">
                                 <label><b>ENTER YOUR ID NUMBER</b></label><input type="text" name="id" required pattern="[0-9]{13}" title="Enter a Valid IDnumber"/><br>
-
+                                <?php draw_tokenbox(); ?>
                                 <input type="submit" name="rfg" value="Send Password" class="btn" />
                             </form>
                             <br>
@@ -227,7 +230,7 @@ if (isset($_GET['page'])) {
                                 <br>
 
                                 <input type="password" name="pass" value="" required autocomplete="off"/>
-                                <input type="hidden" name="token" value="<?php print $token; ?>" />
+                                <?php draw_tokenbox(); ?>
                                 <br>
                                 <input type="submit" name="send" value="Login" class="btn"/>
                                 <input type="reset" name="reset" value="Cancel" class="btn"/>

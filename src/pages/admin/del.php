@@ -2,7 +2,7 @@
 
 <?php
 if (isset($_POST['del'])) {
-
+    check_token();
     $id = $_POST['id'];
 
     if (isAdmin($id))
@@ -21,7 +21,7 @@ if (isset($_POST['del'])) {
         <label>Customer's ID Number</label><br>
 
         <input type="text" name="id" required /><br>
-
+        <?php draw_tokenbox(); ?>
         <input type="submit" name="del" value="Degregister" class="btn"/>
 
     </fieldset>

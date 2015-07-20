@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['block'])) {
-
+    check_token();
     $rate = $_POST['rate'];
     $user = $_POST['username'];
     if (isAdmin($user))
@@ -28,7 +28,7 @@ if (isset($_POST['block'])) {
         </select>
         <br>
         <input type="submit" name="block" value="Block" class="btn"/>
+        <?php draw_tokenbox(); ?>
     </fieldset>
 
 </form>
-

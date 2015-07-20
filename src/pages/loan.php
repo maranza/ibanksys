@@ -4,6 +4,7 @@
 
     <?php
     if (isset($_POST['apply'])) {
+        check_token();
         if (checkloan($profile->getIdnumber()))
             print_flash_message("Your previous Loan request Has not been Approved Yet.<br>");
         else
@@ -35,8 +36,10 @@
         </select><br>
 
         <label>Requested Amount</label><br>
+
         <input type="text" name="amt"  required/><br>
         <input type="hidden" name="date" value="<?php echo date("Y-m-d"); ?>" />
+        <?php draw_tokenbox(); ?>
         <input type="submit" name="apply" value="Apply" class="btn" required>
         <input type="reset" name="cancel" value="Cancel" class="btn" required>
 

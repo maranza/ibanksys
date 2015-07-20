@@ -1,5 +1,6 @@
 <?php
 if (isset($_POST['reg'])) {
+    check_token();
     //INSERT INTO customer values(:name,:last,:dob,:id,:pass,:add,:mob,:email)
     $data = array();
     $data['name'] = $_POST['fname'];
@@ -57,6 +58,7 @@ if (isset($_POST['reg'])) {
             <tr>
                 <td><input type="date" name="dob" id="date" value="<?php print @$_POST['dob']; ?>" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" title="Date Should be in this format YYYY-MM-DD"  required></td>
                 <td><input type="email" name="email" value="<?php print @$_POST['email']; ?>"  id="textfield6" required></td>
+                <td><?php draw_tokenbox(); ?></td>
             </tr>
             <tr>
                 <td>IDNumber</td>
@@ -83,4 +85,3 @@ if (isset($_POST['reg'])) {
         <input type="reset" name="res" value="Cancel"  class="btn"/>
     </fieldset>
 </form>
-
